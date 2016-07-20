@@ -1,1 +1,2 @@
 d:\user data\documents\visual studio 2015\Projects\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe.config
+C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe.config
