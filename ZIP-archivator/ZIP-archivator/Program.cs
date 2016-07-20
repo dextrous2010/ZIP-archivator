@@ -29,6 +29,8 @@ namespace ZIP_archivator
             // Comment after revert 3
 
             // Comment after revert 4
+
+            // Commit after Viktor has added some code
         }
 
         static void sdf()
