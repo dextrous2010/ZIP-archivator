@@ -19,7 +19,7 @@ namespace ZIP_archivator
             Application.Run(new Form1());
 
             //Viktor King
-            //Vikto2
+
         }
     }
 }
