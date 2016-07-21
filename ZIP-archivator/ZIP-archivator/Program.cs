@@ -18,24 +18,7 @@ namespace ZIP_archivator
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            //Viktor King
-
-            // Comment after revert
-
-            // Comment after revert 2
-            sdfsf
-                sfdsdf
-
-            // Comment after revert 3
-
-            // Comment after revert 4
-            // Comment after revert 5
-
-            // Comment after revert 6
-
-            // Comment after revert 7
-
-            // Comment after revert Den
+            
         }
 
         static void sdf()
