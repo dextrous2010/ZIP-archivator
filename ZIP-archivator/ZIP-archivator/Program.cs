@@ -15,6 +15,7 @@ namespace ZIP_archivator
         static void Main()
         {
             // Application init
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindowForm());  
