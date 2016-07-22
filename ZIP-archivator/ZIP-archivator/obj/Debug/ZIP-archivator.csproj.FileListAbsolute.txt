@@ -3,7 +3,6 @@ C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\De
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe.config
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.pdb
-C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.Properties.Resources.resources
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.exe
@@ -17,3 +16,5 @@ C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\De
 C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.pdb
 C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.MainWindowForm.resources
 C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.FormArchiveProperties.resources
+C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.FormArchiveProperties.resources
+C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.MainWindowForm.resources
