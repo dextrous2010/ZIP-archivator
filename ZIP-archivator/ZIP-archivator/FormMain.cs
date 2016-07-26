@@ -16,7 +16,14 @@ namespace ZIP_archivator
         public MainWindowForm()
         {
             InitializeComponent();
-            PopulateTreeView();
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            for (int i = 0; i < allDrives.Length; i++)
+            {
+                PopulateTreeView(allDrives[i].Name);
+            }
+
             this.treeView1.NodeMouseClick +=
     new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
         }
@@ -40,11 +47,12 @@ namespace ZIP_archivator
 
         // Populating the TreeView with nodes and subnodes
         //
-        private void PopulateTreeView()
+        private void PopulateTreeView(String path)
         {
+
             TreeNode rootNode;
 
-            DirectoryInfo info = new DirectoryInfo(@"../..");
+            DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
                 rootNode = new TreeNode(info.Name);
@@ -60,18 +68,20 @@ namespace ZIP_archivator
             DirectoryInfo[] subSubDirs;
             foreach (DirectoryInfo subDir in subDirs)
             {
-                aNode = new TreeNode(subDir.Name, 0, 0);
-                aNode.Tag = subDir;
-                aNode.ImageKey = "folder";
-                subSubDirs = subDir.GetDirectories();
-                if (subSubDirs.Length != 0)
+                if ((subDir.Attributes & FileAttributes.System) != FileAttributes.System & subDir.FullName != @"C:\Windows")
                 {
-                    GetDirectories(subSubDirs, aNode);
+                    aNode = new TreeNode(subDir.Name, 0, 0);
+                    aNode.Tag = subDir;
+                    aNode.ImageKey = "folder";
+                    subSubDirs = subDir.GetDirectories();
+                    if (subSubDirs.Length != 0)
+                    {
+                        GetDirectories(subSubDirs, aNode);
+                    }
+                    nodeToAddTo.Nodes.Add(aNode);
                 }
-                nodeToAddTo.Nodes.Add(aNode);
             }
         }
-
 
         // Handle the NodeMouseClick event for treeview1, 
         // and implement the code to populate listview1 with a node's contents 
