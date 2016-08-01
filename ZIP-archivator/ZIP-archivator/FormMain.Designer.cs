@@ -92,6 +92,7 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(147, 327);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // listView1
             // 
@@ -100,6 +101,7 @@
             this.listView1.Size = new System.Drawing.Size(297, 327);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // MainWindowForm
             // 

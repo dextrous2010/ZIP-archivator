@@ -27,3 +27,4 @@ C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.MainWindowForm.resources
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
+C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
