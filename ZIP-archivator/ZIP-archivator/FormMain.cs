@@ -89,22 +89,36 @@ namespace ZIP_archivator
         //
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+
+            ImageList imageList1 = new ImageList();
+            listView1.SmallImageList = imageList1;
+            // listView1.View = View.SmallIcon;
+
+    
             TreeNode newSelected = e.Node;
             listView1.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
 
+
             foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
             {
+
                 item = new ListViewItem(dir.Name, 0);
                 subItems = new ListViewItem.ListViewSubItem[]
                           {new ListViewItem.ListViewSubItem(item, "Directory"),
                    new ListViewItem.ListViewSubItem(item,
                 dir.LastAccessTime.ToShortDateString())};
                 item.SubItems.AddRange(subItems);
+
+
+
                 listView1.Items.Add(item);
             }
+
+            
+
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
                 item = new ListViewItem(file.Name, 1);
@@ -114,12 +128,25 @@ namespace ZIP_archivator
                 file.LastAccessTime.ToShortDateString())};
 
                 item.SubItems.AddRange(subItems);
+
+                // Set a default icon for the file.
+                Icon iconForFile = SystemIcons.WinLogo;
+
+                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
+                // Check to see if the image collection contains an image
+                // for this extension, using the extension as a key.
+                if (!imageList1.Images.ContainsKey(file.Extension))
+                {
+                    // If not, add the image to the image list.
+                    iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
+                    imageList1.Images.Add(file.Extension, iconForFile);
+                }
+                item.ImageKey = file.Extension;
                 listView1.Items.Add(item);
             }
 
             //listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            //listView1.
         }
 
 
