@@ -117,7 +117,9 @@ namespace ZIP_archivator
                 listView1.Items.Add(item);
             }
 
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            //listView1.
         }
 
 
@@ -127,14 +129,14 @@ namespace ZIP_archivator
         {
             fullPath = null;
             fullPath = treeView1.SelectedNode.FullPath;
-            MessageBox.Show(fullPath);
+            // MessageBox.Show(fullPath);
         }
 
         private void listView1_Click(object sender, EventArgs e)
         {
             fullPath = null;
             fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-            MessageBox.Show(fullPath);
+            // MessageBox.Show(fullPath);
         }
     }
 
