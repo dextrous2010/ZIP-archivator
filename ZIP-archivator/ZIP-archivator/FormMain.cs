@@ -13,6 +13,8 @@ namespace ZIP_archivator
 {
     public partial class MainWindowForm : Form
     {
+        public String fullPath, fileName;
+       
         public MainWindowForm()
         {
             InitializeComponent();
@@ -34,11 +36,7 @@ namespace ZIP_archivator
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormArchiveProperties newArchiveForm = new FormArchiveProperties();
-            newArchiveForm.Show();
-        }
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -150,7 +148,7 @@ namespace ZIP_archivator
         }
 
 
-        String fullPath;
+        
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -161,9 +159,34 @@ namespace ZIP_archivator
 
         private void listView1_Click(object sender, EventArgs e)
         {
+            
             fullPath = null;
+
             fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-            // MessageBox.Show(fullPath);
+            fileName = treeView1.SelectedNode.FullPath + @"\" + System.IO.Path.GetFileNameWithoutExtension(fullPath);
+            
+            MessageBox.Show(fileName);
+            //listView1.Focused
+            //listView1.FocusedItem.
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+            FormArchiveProperties newArchiveForm = new FormArchiveProperties();
+            newArchiveForm.fileToZip = fullPath;
+            newArchiveForm.textBox1.Text = fileName + @".zip";
+            newArchiveForm.savePath = fileName + @".zip";
+            newArchiveForm.Show();
+
+        }
+
+
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

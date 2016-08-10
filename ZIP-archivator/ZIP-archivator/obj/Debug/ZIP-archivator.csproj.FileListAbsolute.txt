@@ -28,3 +28,15 @@ C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe.config
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.exe
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.pdb
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.pdb
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.FormArchiveProperties.resources
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.MainWindowForm.resources
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.Properties.Resources.resources
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\bin\Debug\Ionic.Zip.dll
+D:\User Data\Documents\Visual Studio 2015\Projects\1\ZIP-archivator\ZIP-archivator\bin\Debug\Ionic.Zlib.dll

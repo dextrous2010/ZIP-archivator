@@ -104,6 +104,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.UseWaitCursor = true;
             this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // MainWindowForm
@@ -133,8 +134,8 @@
         private System.Windows.Forms.Button AddButtom;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        public System.Windows.Forms.TreeView treeView1;
     }
 }
 
