@@ -13,8 +13,6 @@ namespace ZIP_archivator
 {
     public partial class MainWindowForm : Form
     {
-        public String fullPath, fileName;
-       
         public MainWindowForm()
         {
             InitializeComponent();
@@ -36,7 +34,11 @@ namespace ZIP_archivator
 
         }
 
-        
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormArchiveProperties newArchiveForm = new FormArchiveProperties();
+            newArchiveForm.Show();
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -89,36 +91,48 @@ namespace ZIP_archivator
         {
 
             ImageList imageList1 = new ImageList();
-            listView1.SmallImageList = imageList1;
-            // listView1.View = View.SmallIcon;
+            listView1.LargeImageList = imageList1;
 
-    
             TreeNode newSelected = e.Node;
             listView1.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
 
-
             foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
             {
-
                 item = new ListViewItem(dir.Name, 0);
                 subItems = new ListViewItem.ListViewSubItem[]
                           {new ListViewItem.ListViewSubItem(item, "Directory"),
                    new ListViewItem.ListViewSubItem(item,
                 dir.LastAccessTime.ToShortDateString())};
                 item.SubItems.AddRange(subItems);
-
-
-
                 listView1.Items.Add(item);
             }
 
-            
-
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
+            
+                // Set a default icon for the file
+                Icon iconForFile = SystemIcons.WinLogo;
+                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
+
+                // Check to see if the image collection contains an image
+                // for this extension, using the extension as a key
+
+                if(!imageList1.Images.ContainsKey(file.Extension))
+                {
+                    // If not, add the image to the image list
+                    iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
+                    imageList1.Images.Add(file.Extension, iconForFile);
+                }
+                try
+                {
+                    item.ImageKey = file.Extension;
+                }
+                catch (System.NullReferenceException) { }
+
+
                 item = new ListViewItem(file.Name, 1);
                 subItems = new ListViewItem.ListViewSubItem[]
                           { new ListViewItem.ListViewSubItem(item, "File"),
@@ -126,29 +140,14 @@ namespace ZIP_archivator
                 file.LastAccessTime.ToShortDateString())};
 
                 item.SubItems.AddRange(subItems);
-
-                // Set a default icon for the file.
-                Icon iconForFile = SystemIcons.WinLogo;
-
-                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
-                // Check to see if the image collection contains an image
-                // for this extension, using the extension as a key.
-                if (!imageList1.Images.ContainsKey(file.Extension))
-                {
-                    // If not, add the image to the image list.
-                    iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
-                    imageList1.Images.Add(file.Extension, iconForFile);
-                }
-                item.ImageKey = file.Extension;
                 listView1.Items.Add(item);
             }
 
-            //listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
 
-        
+        String fullPath;
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -159,34 +158,9 @@ namespace ZIP_archivator
 
         private void listView1_Click(object sender, EventArgs e)
         {
-            
             fullPath = null;
-
             fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-            fileName = treeView1.SelectedNode.FullPath + @"\" + System.IO.Path.GetFileNameWithoutExtension(fullPath);
-            
-            MessageBox.Show(fileName);
-            //listView1.Focused
-            //listView1.FocusedItem.
-            
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            
-            FormArchiveProperties newArchiveForm = new FormArchiveProperties();
-            newArchiveForm.fileToZip = fullPath;
-            newArchiveForm.textBox1.Text = fileName + @".zip";
-            newArchiveForm.savePath = fileName + @".zip";
-            newArchiveForm.Show();
-
-        }
-
-
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            // MessageBox.Show(fullPath);
         }
     }
 
