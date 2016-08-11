@@ -50,7 +50,11 @@ namespace ZIP_archivator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (fullPath == null)
+            if(Path.GetExtension(fullPath) != ".zip")
+            {
+                MessageBox.Show("This is not archive");
+            }
+            else if(fullPath == null)
             {
                 MessageBox.Show("Please, choose the file");
             }

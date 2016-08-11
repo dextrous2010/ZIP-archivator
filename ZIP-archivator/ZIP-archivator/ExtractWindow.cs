@@ -16,7 +16,7 @@ namespace ZIP_archivator
 
     {
         //змінні для архівації
-        public static string fullPathTofile, fullPathToDirectory, saveDirectory;
+        public static string fullPathTofile, fullPathToDirectory;
 
         public ExtractWindow()
         {
@@ -30,7 +30,8 @@ namespace ZIP_archivator
 
         private void ExtractWindow_Load(object sender, EventArgs e)
         {
-            textBox1.Text = saveDirectory;
+            textBox1.Text = fullPathToDirectory;
+            label3.Text = Path.GetFileName(fullPathTofile);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,7 +41,7 @@ namespace ZIP_archivator
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string tempPath = "";
+            string tempPath = fullPathToDirectory;
 
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 
@@ -58,20 +59,27 @@ namespace ZIP_archivator
             // MessageBox.Show("'Browse' in progress");
         }
 
+        
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             ////////////////////////////////////////////////////////////////-------------------extract--------------------------
-            if (Path.GetExtension(fullPathTofile) == ".zip")
-            {
+            
                 using (ZipFile zip = ZipFile.Read(fullPathTofile))
                 {
                     zip.ExtractAll(textBox1.Text, ExtractExistingFileAction.OverwriteSilently);
                 }
-            }
-            else
-            {
-                MessageBox.Show("This is not archive");
-            }
+            
             MessageBox.Show("Done!");
             this.Close();
         }
