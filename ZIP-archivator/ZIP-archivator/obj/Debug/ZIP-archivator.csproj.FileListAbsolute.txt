@@ -29,3 +29,5 @@ C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
 C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
+C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\Ionic.Zip.dll
+C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.ExtractWindow.resources

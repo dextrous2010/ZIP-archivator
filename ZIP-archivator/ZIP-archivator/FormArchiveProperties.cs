@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ionic.Zip;
 
 namespace ZIP_archivator
 {
     public partial class FormArchiveProperties : Form
     {
+
+        //змінні для архівації
+        public static string fullPathTofile, fullPathToDirectory, saveDirectory;
+
         public FormArchiveProperties()
         {
             InitializeComponent();
@@ -19,7 +24,7 @@ namespace ZIP_archivator
 
         private void ArchiveProperties_Load(object sender, EventArgs e)
         {
-
+            textBox1.Text = fullPathToDirectory + @"\" + System.IO.Path.GetFileNameWithoutExtension(fullPathTofile) + @".zip";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -29,12 +34,56 @@ namespace ZIP_archivator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("'OK' in progress");
+
+            
+                if (System.IO.File.Exists(fullPathTofile))
+                {
+                    using (ZipFile zip = new ZipFile())
+                    {
+                        zip.AddFile(fullPathTofile);
+                        zip.Save(textBox1.Text);
+
+                    }
+                    //MessageBox.Show("This is file");
+                }
+                else if (System.IO.Directory.Exists(fullPathTofile))
+                {
+                    using (ZipFile zip = new ZipFile())
+                    {
+                        zip.AddDirectory(fullPathTofile);
+                        zip.Save(textBox1.Text);
+                    }
+                    //MessageBox.Show("This is directory");
+                }
+            
+
+            
+
+            MessageBox.Show("Done!");
+
+
+
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("'Browse' in progress");
+            string tempPath = fullPathToDirectory;
+
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+          
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tempPath = folderBrowserDialog1.SelectedPath; // prints path
+            }
+
+            saveDirectory = tempPath + @"\" + System.IO.Path.GetFileNameWithoutExtension(fullPathTofile) + @".zip";
+            textBox1.Text = saveDirectory;
+
+            //MessageBox.Show(saveDirectory);
+
+            // MessageBox.Show("'Browse' in progress");
         }
     }
 }

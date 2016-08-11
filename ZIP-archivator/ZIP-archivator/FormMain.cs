@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Ionic.Zip;
 
 namespace ZIP_archivator
 {
@@ -36,13 +37,28 @@ namespace ZIP_archivator
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            FormArchiveProperties newArchiveForm = new FormArchiveProperties();
-            newArchiveForm.Show();
+            if (fullPath == null)
+            {
+                MessageBox.Show("Please, choose the file");
+            }
+            else
+            {
+                FormArchiveProperties newArchiveForm = new FormArchiveProperties();
+                newArchiveForm.Show();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("'Extract To' in progress");
+            if (fullPath == null)
+            {
+                MessageBox.Show("Please, choose the file");
+            }
+            else
+            {
+                ExtractWindow extractWindow = new ExtractWindow();
+                extractWindow.Show();
+            }
         }
 
         // Populating the TreeView with nodes and subnodes
@@ -87,8 +103,10 @@ namespace ZIP_archivator
         // and implement the code to populate listview1 with a node's contents 
         // when a node is clicked
         //
-        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+
+      void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            
 
             ImageList imageList1 = new ImageList();
             listView1.LargeImageList = imageList1;
@@ -148,10 +166,12 @@ namespace ZIP_archivator
 
 
         String fullPath;
+        String fileName;
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             fullPath = null;
+            fileName = treeView1.SelectedNode.Text;
             fullPath = treeView1.SelectedNode.FullPath;
             // MessageBox.Show(fullPath);
         }
@@ -159,8 +179,43 @@ namespace ZIP_archivator
         private void listView1_Click(object sender, EventArgs e)
         {
             fullPath = null;
-            fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-            // MessageBox.Show(fullPath);
+            try
+            {
+                
+                fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
+            
+            }
+            catch(NullReferenceException)
+            {
+                
+            }
+
+            try
+            {
+                FormArchiveProperties.fullPathTofile = fullPath;
+                FormArchiveProperties.fullPathToDirectory = treeView1.SelectedNode.FullPath;
+                ExtractWindow.fullPathTofile = fullPath;
+                ExtractWindow.fullPathToDirectory = treeView1.SelectedNode.FullPath;
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Refresh");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Delete");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("About");
         }
     }
 
