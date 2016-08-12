@@ -50,11 +50,11 @@ namespace ZIP_archivator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(Path.GetExtension(fullPath) != ".zip")
+            if (Path.GetExtension(fullPath) != ".zip")
             {
                 MessageBox.Show("This is not archive");
             }
-            else if(fullPath == null)
+            else if (fullPath == null)
             {
                 MessageBox.Show("Please, choose the file");
             }
@@ -88,7 +88,7 @@ namespace ZIP_archivator
             DirectoryInfo[] subSubDirs;
             foreach (DirectoryInfo subDir in subDirs)
             {
-                if ((subDir.Attributes & FileAttributes.System) != FileAttributes.System & subDir.FullName != @"C:\Windows")
+                if ((subDir.Attributes & FileAttributes.System) != FileAttributes.System & subDir.FullName != @"C:\Windows" & subDir.FullName != @"C:\ProgramData")
                 {
                     aNode = new TreeNode(subDir.Name, 0, 0);
                     aNode.Tag = subDir;
@@ -103,19 +103,27 @@ namespace ZIP_archivator
             }
         }
 
+        TreeNodeMouseClickEventArgs e_dup;
+
         // Handle the NodeMouseClick event for treeview1, 
         // and implement the code to populate listview1 with a node's contents 
         // when a node is clicked
         //
 
-      void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            
+            e_dup = e;
+            listViewDraw();
+        }
+
+
+        void listViewDraw()
+        {
 
             ImageList imageList1 = new ImageList();
             listView1.LargeImageList = imageList1;
 
-            TreeNode newSelected = e.Node;
+            TreeNode newSelected = e_dup.Node;
             listView1.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
@@ -125,7 +133,7 @@ namespace ZIP_archivator
             {
                 item = new ListViewItem(dir.Name, 0);
                 subItems = new ListViewItem.ListViewSubItem[]
-                          {new ListViewItem.ListViewSubItem(item, "Directory"),
+                                  {new ListViewItem.ListViewSubItem(item, "Directory"),
                    new ListViewItem.ListViewSubItem(item,
                 dir.LastAccessTime.ToShortDateString())};
                 item.SubItems.AddRange(subItems);
@@ -134,7 +142,7 @@ namespace ZIP_archivator
 
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
-            
+
                 // Set a default icon for the file
                 Icon iconForFile = SystemIcons.WinLogo;
                 iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
@@ -142,7 +150,7 @@ namespace ZIP_archivator
                 // Check to see if the image collection contains an image
                 // for this extension, using the extension as a key
 
-                if(!imageList1.Images.ContainsKey(file.Extension))
+                if (!imageList1.Images.ContainsKey(file.Extension))
                 {
                     // If not, add the image to the image list
                     iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
@@ -157,7 +165,7 @@ namespace ZIP_archivator
 
                 item = new ListViewItem(file.Name, 1);
                 subItems = new ListViewItem.ListViewSubItem[]
-                          { new ListViewItem.ListViewSubItem(item, "File"),
+                                          { new ListViewItem.ListViewSubItem(item, "File"),
                    new ListViewItem.ListViewSubItem(item,
                 file.LastAccessTime.ToShortDateString())};
 
@@ -166,6 +174,7 @@ namespace ZIP_archivator
             }
 
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
         }
 
 
@@ -178,6 +187,18 @@ namespace ZIP_archivator
             fileName = treeView1.SelectedNode.Text;
             fullPath = treeView1.SelectedNode.FullPath;
             // MessageBox.Show(fullPath);
+
+            try
+            {
+                FormArchiveProperties.fullPathTofile = fullPath;
+                FormArchiveProperties.fullPathToDirectory = treeView1.SelectedNode.FullPath;
+                ExtractWindow.fullPathTofile = fullPath;
+                ExtractWindow.fullPathToDirectory = treeView1.SelectedNode.FullPath;
+            }
+            catch (NullReferenceException)
+            {
+
+            }
         }
 
         private void listView1_Click(object sender, EventArgs e)
@@ -185,13 +206,13 @@ namespace ZIP_archivator
             fullPath = null;
             try
             {
-                
+
                 fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-            
+
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
-                
+
             }
 
             try
@@ -209,7 +230,7 @@ namespace ZIP_archivator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Refresh");
+            listViewDraw();
         }
 
         private void button3_Click(object sender, EventArgs e)

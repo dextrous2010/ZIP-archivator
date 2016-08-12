@@ -35,11 +35,13 @@ namespace ZIP_archivator
         private void button1_Click(object sender, EventArgs e)
         {
 
-            
+            try
+            {
                 if (System.IO.File.Exists(fullPathTofile))
                 {
                     using (ZipFile zip = new ZipFile())
                     {
+
                         zip.AddFile(fullPathTofile);
                         zip.Save(textBox1.Text);
 
@@ -55,13 +57,14 @@ namespace ZIP_archivator
                     }
                     //MessageBox.Show("This is directory");
                 }
-            
 
-            
+                MessageBox.Show("Done!");
 
-            MessageBox.Show("Done!");
-
-
+            }
+            catch (System.IO.IOException)
+            {
+                MessageBox.Show("You cannot archive a system file!");
+            }
 
             this.Close();
         }

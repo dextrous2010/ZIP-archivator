@@ -31,3 +31,14 @@ C:\Users\Administrator\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator
 C:\Users\Денис\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
 C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\bin\Debug\Ionic.Zip.dll
 C:\Users\Viktor\Source\Repos\ZIP-archivator\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.ExtractWindow.resources
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe.config
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.exe
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.pdb
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.exe
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\bin\Debug\ZIP-archivator.pdb
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csprojResolveAssemblyReference.cache
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.ExtractWindow.resources
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.FormArchiveProperties.resources
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.MainWindowForm.resources
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP_archivator.Properties.Resources.resources
+C:\Users\denysh\Source\Repos\ZIP-archivator4\ZIP-archivator\ZIP-archivator\obj\Debug\ZIP-archivator.csproj.GenerateResource.Cache
