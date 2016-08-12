@@ -25,8 +25,8 @@ namespace ZIP_archivator
                 PopulateTreeView(allDrives[i].Name);
             }
 
-            this.treeView1.NodeMouseClick +=
-    new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+    //        this.treeView1.NodeMouseClick +=
+    //new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
         }
 
 
@@ -50,14 +50,15 @@ namespace ZIP_archivator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Path.GetExtension(fullPath) != ".zip")
+            if (Path.GetExtension(fullPath) == null)
             {
-                MessageBox.Show("This is not archive");
+                MessageBox.Show("File is not chosen!");
             }
-            else if (fullPath == null)
+            else if (Path.GetExtension(fullPath) != ".zip")
             {
-                MessageBox.Show("Please, choose the file");
+                MessageBox.Show("This is not an archive");
             }
+
             else
             {
                 ExtractWindow extractWindow = new ExtractWindow();
@@ -103,18 +104,17 @@ namespace ZIP_archivator
             }
         }
 
-        TreeNodeMouseClickEventArgs e_dup;
+        TreeViewEventArgs e_dup;
 
         // Handle the NodeMouseClick event for treeview1, 
         // and implement the code to populate listview1 with a node's contents 
         // when a node is clicked
         //
 
-        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            e_dup = e;
-            listViewDraw();
-        }
+        //void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        //{
+
+        //}
 
 
         void listViewDraw()
@@ -183,6 +183,9 @@ namespace ZIP_archivator
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+
+            e_dup = e;
+
             fullPath = null;
             fileName = treeView1.SelectedNode.Text;
             fullPath = treeView1.SelectedNode.FullPath;
@@ -195,10 +198,10 @@ namespace ZIP_archivator
                 ExtractWindow.fullPathTofile = fullPath;
                 ExtractWindow.fullPathToDirectory = treeView1.SelectedNode.FullPath;
             }
-            catch (NullReferenceException)
-            {
+            catch (NullReferenceException) { }
 
-            }
+            listViewDraw();
+
         }
 
         private void listView1_Click(object sender, EventArgs e)
@@ -206,14 +209,9 @@ namespace ZIP_archivator
             fullPath = null;
             try
             {
-
                 fullPath = treeView1.SelectedNode.FullPath + @"\" + listView1.FocusedItem.Text;
-
             }
-            catch (NullReferenceException)
-            {
-
-            }
+            catch (NullReferenceException) {}
 
             try
             {
@@ -222,26 +220,49 @@ namespace ZIP_archivator
                 ExtractWindow.fullPathTofile = fullPath;
                 ExtractWindow.fullPathToDirectory = treeView1.SelectedNode.FullPath;
             }
-            catch (NullReferenceException)
-            {
-
-            }
+            catch (NullReferenceException) { }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listViewDraw();
+            try { listViewDraw(); }
+            catch (System.NullReferenceException) { }            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Delete");
+
+            if (Path.GetExtension(fullPath) == null)
+            {
+                MessageBox.Show("File is not chosen!");
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete It?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        File.Delete(fullPath);
+                        MessageBox.Show("Deleted!");
+                    }
+                    catch (System.IO.IOException)
+                    {
+                        MessageBox.Show("Cannot deleted!");
+                    }
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+
+                }
+            }  
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("About");
+            MessageBox.Show("Archiving tool.");
         }
+
     }
 
 }
