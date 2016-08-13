@@ -35,7 +35,7 @@ namespace ZIP_archivator
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void AddButtom_Click_1(object sender, EventArgs e)
         {
             if (fullPath == null)
             {
@@ -48,7 +48,7 @@ namespace ZIP_archivator
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ExtractButton_Click(object sender, EventArgs e)
         {
             if (Path.GetExtension(fullPath) == null)
             {
@@ -129,52 +129,59 @@ namespace ZIP_archivator
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
 
-            foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
+            try
             {
-                item = new ListViewItem(dir.Name, 0);
-                subItems = new ListViewItem.ListViewSubItem[]
-                                  {new ListViewItem.ListViewSubItem(item, "Directory"),
+                foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
+                {
+                    item = new ListViewItem(dir.Name, 0);
+                    subItems = new ListViewItem.ListViewSubItem[]
+                                      {new ListViewItem.ListViewSubItem(item, "Directory"),
                    new ListViewItem.ListViewSubItem(item,
                 dir.LastAccessTime.ToShortDateString())};
-                item.SubItems.AddRange(subItems);
-                listView1.Items.Add(item);
-            }
-
-            foreach (FileInfo file in nodeDirInfo.GetFiles())
-            {
-
-                // Set a default icon for the file
-                Icon iconForFile = SystemIcons.WinLogo;
-                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
-
-                // Check to see if the image collection contains an image
-                // for this extension, using the extension as a key
-
-                if (!imageList1.Images.ContainsKey(file.Extension))
-                {
-                    // If not, add the image to the image list
-                    iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
-                    imageList1.Images.Add(file.Extension, iconForFile);
+                    item.SubItems.AddRange(subItems);
+                    listView1.Items.Add(item);
                 }
-                try
+
+                foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {
-                    item.ImageKey = file.Extension;
-                }
-                catch (System.NullReferenceException) { }
+
+                    // Set a default icon for the file
+                    Icon iconForFile = SystemIcons.WinLogo;
+                    iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
+
+                    // Check to see if the image collection contains an image
+                    // for this extension, using the extension as a key
+
+                    if (!imageList1.Images.ContainsKey(file.Extension))
+                    {
+                        // If not, add the image to the image list
+                        iconForFile = System.Drawing.Icon.ExtractAssociatedIcon(file.FullName);
+                        imageList1.Images.Add(file.Extension, iconForFile);
+                    }
+                    try
+                    {
+                        item.ImageKey = file.Extension;
+                    }
+                    catch (System.NullReferenceException) { }
 
 
-                item = new ListViewItem(file.Name, 1);
-                subItems = new ListViewItem.ListViewSubItem[]
-                                          { new ListViewItem.ListViewSubItem(item, "File"),
+                    item = new ListViewItem(file.Name, 1);
+                    subItems = new ListViewItem.ListViewSubItem[]
+                                              { new ListViewItem.ListViewSubItem(item, "File"),
                    new ListViewItem.ListViewSubItem(item,
                 file.LastAccessTime.ToShortDateString())};
 
-                item.SubItems.AddRange(subItems);
-                listView1.Items.Add(item);
+                    item.SubItems.AddRange(subItems);
+                    listView1.Items.Add(item);
+                }
+
+                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
 
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                MessageBox.Show("This folder doesn't exist!");
+            }
         }
 
 
@@ -223,13 +230,13 @@ namespace ZIP_archivator
             catch (NullReferenceException) { }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
         {
             try { listViewDraw(); }
             catch (System.NullReferenceException) { }            
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
 
             if (Path.GetExtension(fullPath) == null)
@@ -241,24 +248,52 @@ namespace ZIP_archivator
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete It?", "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+
+                    // Detect whether its a directory or a file
+
                     try
                     {
-                        File.Delete(fullPath);
-                        MessageBox.Show("Deleted!");
+                        if (File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory))
+                            try
+                            {
+                                Directory.Delete(fullPath);
+                                MessageBox.Show("The directory was deleted!");
+                            }
+                            catch (System.IO.IOException)
+                            {
+                                MessageBox.Show("Cannot deleted!");
+                            }
+                            catch (System.UnauthorizedAccessException)
+                            {
+                                MessageBox.Show("You don't have right permissions!");
+                            }
+                        else
+                        {
+                            try
+                            {
+                                File.Delete(fullPath);
+                                MessageBox.Show("The file was deleted!");
+                            }
+                            catch (System.IO.IOException)
+                            {
+                                MessageBox.Show("Cannot deleted!");
+                            }
+                            catch (System.UnauthorizedAccessException)
+                            {
+                                Directory.Delete(fullPath);
+                                MessageBox.Show("You don't have right permissions!");
+                            }
+                        }
                     }
-                    catch (System.IO.IOException)
+                    catch (System.IO.FileNotFoundException)
                     {
-                        MessageBox.Show("Cannot deleted!");
+                        MessageBox.Show("File or directory doesn't exist!");
                     }
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-
                 }
             }  
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void AboutButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Archiving tool.");
         }
